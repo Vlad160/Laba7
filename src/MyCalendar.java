@@ -1,10 +1,10 @@
-/**
- * Created by User on 17.11.2016.
- */
-
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Formatter;
+import java.util.Locale;
 
 public class MyCalendar {
     public static void main(String[] args) {
@@ -16,8 +16,9 @@ public class MyCalendar {
             calendar.set(Calendar.MINUTE, i + 20);
             System.out.println("Месяц: " + calendar.get(Calendar.MONTH) + " Часы: " + calendar.get(Calendar.HOUR) + " Минуты: " + calendar.get(Calendar.MINUTE));
         }
-        // calendar.clear();
-        //calendar = Calendar.getInstance();
+        Formatter fmt = new Formatter();
+        fmt.format("%th, %tH,%tM",calendar,calendar,calendar);
+        System.out.println(fmt);
         long time = 228228228228L;
         Date date = new Date(time);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
@@ -35,5 +36,16 @@ public class MyCalendar {
         simpleDateFormat.applyPattern("mm");
         System.out.println("Минуты с лидирующим нулем: " + simpleDateFormat.format(date));
 
+        String string = "January 2, 1228";
+        DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
+        try {
+            Date date1 = format.parse(string);
+            System.out.println(date1); // Sat Jan 02 00:00:00 GMT 2010
+        }
+        catch (ParseException e){
+            System.out.println("Cannot parse");
+        }
+
     }
+
 }
